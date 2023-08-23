@@ -63,7 +63,12 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
-        datagrama_alterado = dados.replace(b'\xC0', b'')
+        # datagrama_alterado = dados.replace(b'\xC0', b'')
+        i = 0
+        while(i < 2):
+            if (b'\xC0') in dados:
+                i += 1
+            
         self.callback(datagrama_alterado)
 
         pass
