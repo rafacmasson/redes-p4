@@ -48,8 +48,8 @@ class Enlace:
         self.callback = callback
 
     def enviar(self, datagrama):
-        datagrama_codificado = datagrama.replace(b'\xDB', b'\xDB\xDD').replace(b'\xC0', b'\xDB\xDC')
-        datagrama_codificado = b'\xC0' + datagrama_codificado + b'\xC0'
+        datagrama_codificado = datagrama.replace(b'\xDB', b'\xDB\xDD').replace(b'\xC0', b'\xDB\xDC')    # Passo 2
+        datagrama_codificado = b'\xC0' + datagrama_codificado + b'\xC0' # Passo 1
 
         self.linha_serial.enviar(datagrama_codificado)
 
@@ -63,4 +63,7 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
+        datagrama_alterado = dados.replace(b'\xDB', '')
+        self.callback(datagrama_alterado)
+
         pass
