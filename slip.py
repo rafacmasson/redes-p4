@@ -68,9 +68,10 @@ class Enlace:
         for item in dados_lista:
             if (len(item) != 0): 
                 self.dados_acumulados = self.dados_acumulados + item
-        if (self.dados_acumulados != b''):
-            self.callback(self.dados_acumulados)
-            self.dados_acumulados = b''
+            elif (len(self.dados_acumulados) != 0 & len(item) == 0):
+                self.callback(self.dados_acumulados)
+                self.dados_acumulados = b''
+        # if (self.dados_acumulados != b''):
 
         pass
         # self.
