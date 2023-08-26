@@ -78,7 +78,9 @@ class Enlace:
                     dados_acumulados = b''
             dados_acumulados = dados_acumulados + item
             print('Dados atuais: ', dados_acumulados)
-        
+        if (len(dados_acumulados != 0)):
+            self.callback(dados_acumulados)
+
         pass
 '''
         acumulador = b''
