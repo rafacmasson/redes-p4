@@ -68,6 +68,7 @@ class Enlace:
         dados_lista = dados.split(b'\xc0')
         dados_acumulados = b''
 
+        print(dados_lista)
         for item in dados_lista:
             print(item)
             if (item == b''):
