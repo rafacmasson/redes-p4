@@ -70,6 +70,7 @@ class Enlace:
                 self.dados_acumulados = self.dados_acumulados + item
         # if (dados_totais != b''):
         self.callback(self.dados_acumulados)
+        self.dados_acumulados = b''
 
         pass
         # self.
