@@ -64,19 +64,29 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
-        dados_lista = dados.split(b'\xc0')
+
+
         acumulador = b''
-
-        if (len(dados_lista) == 1):
-            if (dados_lista[0] != b''):
-                acumulador = acumulador + dados_lista[0]
-            else:
+        for byte in dados:
+            if (byte == b'\xc0'):
                 self.callback(acumulador)
+                acumulador = b''
+            else:
+                acumulador = acumulador + byte
 
-        else:
-            for item in dados_lista:
-                if (len(item) != 0): 
-                    self.callback(item)
+        # dados_lista = dados.split(b'\xc0')
+        # acumulador = b''
+
+        # if (len(dados_lista) == 1):
+        #     if (dados_lista[0] != b''):
+        #         acumulador = acumulador + dados_lista[0]
+        #     else:
+        #         self.callback(acumulador)
+
+        # else:
+        #     for item in dados_lista:
+        #         if (len(item) != 0): 
+        #             self.callback(item)
 
                 # self.dados_acumulados = self.dados_acumulados + item
             # elif (len(self.dados_acumulados) != 0 & len(item) == 0):
