@@ -67,7 +67,7 @@ class Enlace:
         dados_lista = dados.split(b'\xc0')
         acumulador = b''
 
-        if (len(dados_lista == 1)):
+        if (len(dados_lista) == 1):
             if (dados_lista[0] != b''):
                 acumulador = acumulador + dados_lista[0]
             else:
