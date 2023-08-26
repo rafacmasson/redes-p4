@@ -65,7 +65,15 @@ class Enlace:
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
 
+        dados_lista = dados.split(b'\xc0')
+        dados_acumulados = b''
 
+        for item in dados_lista:
+            if (item == b''):
+                self.callback(dados_acumulados)
+                dados_acumulados = b''
+            dados_acumulados = dados_acumulados + item
+'''
         acumulador = b''
         for i in range(len(dados)):
             if (dados[i:i+1] == b'\xc0' & acumulador != b''):
@@ -73,7 +81,7 @@ class Enlace:
                 acumulador = b''
             else:
                 acumulador = acumulador + dados[i:i+1]
-
+'''
         # dados_lista = dados.split(b'\xc0')
         # acumulador = b''
 
