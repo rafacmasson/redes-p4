@@ -68,7 +68,8 @@ class Enlace:
         for item in dados_lista:
             if (len(item) != 0): 
                 dados_totais = dados_totais + item
-        self.callback(dados_totais)
+        if (dados_totais != b''):
+            self.callback(dados_totais)
 
         pass
         # self.
