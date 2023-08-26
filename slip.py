@@ -63,7 +63,7 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
-        dados_arrumados, _ = dados.split(b'\xC0')
+        dados_arrumados = dados.split(b'\xc0')[1]
         self.callback(dados_arrumados)
 
         pass
