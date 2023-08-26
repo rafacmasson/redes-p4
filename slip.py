@@ -73,10 +73,10 @@ class Enlace:
             else:
                 self.callback(acumulador)
 
-
-        for item in dados_lista:
-            if (len(item) != 0): 
-                self.callback(item)
+        else:
+            for item in dados_lista:
+                if (len(item) != 0): 
+                    self.callback(item)
 
                 # self.dados_acumulados = self.dados_acumulados + item
             # elif (len(self.dados_acumulados) != 0 & len(item) == 0):
