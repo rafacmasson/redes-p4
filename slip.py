@@ -67,12 +67,12 @@ class Enlace:
 
 
         acumulador = b''
-        for byte in dados:
-            if (byte == b'\xc0'):
+        for i in range(len(dados)):
+            if (dados[i:i+1] == b'\xc0' & acumulador != b''):
                 self.callback(acumulador)
                 acumulador = b''
             else:
-                acumulador = acumulador + byte
+                acumulador = acumulador + dados[i:i+1]
 
         # dados_lista = dados.split(b'\xc0')
         # acumulador = b''
