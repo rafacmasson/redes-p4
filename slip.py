@@ -63,12 +63,14 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
-        
-        self.residuo_dados = self.residuo_dados + dados
-        self.residuo_dados = self.residuo_dados.split(b'\xC0')
+        print('dados:', dados)
+        print(type(dados))
+        # self.
+        # self.residuo_dados = self.residuo_dados + dados
+        # self.residuo_dados = self.residuo_dados.split(b'\xC0')
 
-        if self.residuo_dados[-1] == b'': # todos os dados estão completos
-            self.callback(self.residuo_dados)
+        # if self.residuo_dados[-1] == b'': # todos os dados estão completos
+            # self.callback(self.residuo_dados)
         
             # conexao.dados_residuais = conexao.dados_residuais[-1]  # os dados recebidos terminam com uma parte incompleta
 
