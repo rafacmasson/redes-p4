@@ -43,7 +43,7 @@ class Enlace:
     def __init__(self, linha_serial):
         self.linha_serial = linha_serial
         self.linha_serial.registrar_recebedor(self.__raw_recv)
-        self.dados_acumulados = b''
+        # self.dados_acumulados = b''
 
     def registrar_recebedor(self, callback):
         self.callback = callback
@@ -73,6 +73,8 @@ class Enlace:
                 self.callback(dados_acumulados)
                 dados_acumulados = b''
             dados_acumulados = dados_acumulados + item
+        
+        pass
 '''
         acumulador = b''
         for i in range(len(dados)):
@@ -102,7 +104,6 @@ class Enlace:
                 # self.dados_acumulados = b''
         # if (self.dados_acumulados != b''):
 
-        pass
         # self.
         # self.residuo_dados = self.residuo_dados + dados
         # self.residuo_dados = self.residuo_dados.split(b'\xC0')
@@ -112,4 +113,3 @@ class Enlace:
         
             # conexao.dados_residuais = conexao.dados_residuais[-1]  # os dados recebidos terminam com uma parte incompleta
 
-        pass
