@@ -72,7 +72,7 @@ class Enlace:
         for item in dados_lista:
             print(item)
             if (item == b''):
-                if (dados_acumulados != b''):
+                if (dados_acumulados != b'' & len(dados_acumulados != 0)):
                     print('Adicionando o', dados_acumulados)
                     self.callback(dados_acumulados)
                     dados_acumulados = b''
