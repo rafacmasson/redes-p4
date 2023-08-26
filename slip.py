@@ -67,7 +67,7 @@ class Enlace:
         dados_lista = dados.split(b'\xc0')
         for item in dados_lista:
             if (len(item) != 0): 
-                self.callback(self.item)
+                self.callback(item)
 
                 # self.dados_acumulados = self.dados_acumulados + item
             # elif (len(self.dados_acumulados) != 0 & len(item) == 0):
