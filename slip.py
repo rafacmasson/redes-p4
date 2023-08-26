@@ -69,6 +69,7 @@ class Enlace:
         dados_acumulados = b''
 
         for item in dados_lista:
+            print(item)
             if (item == b''):
                 if (dados_acumulados != b''):
                     self.callback(dados_acumulados)
