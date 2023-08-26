@@ -77,6 +77,7 @@ class Enlace:
                     self.callback(dados_acumulados)
                     dados_acumulados = b''
             dados_acumulados = dados_acumulados + item
+            print('Dados atuais: ', dados_acumulados)
         
         pass
 '''
