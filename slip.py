@@ -63,8 +63,10 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
-        print('dados:', dados)
-        print(type(dados))
+        dados_arrumados = dados.split(b'\xC0')
+        self.callback(dados_arrumados)
+
+        pass
         # self.
         # self.residuo_dados = self.residuo_dados + dados
         # self.residuo_dados = self.residuo_dados.split(b'\xC0')
