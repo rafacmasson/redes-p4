@@ -70,8 +70,9 @@ class Enlace:
 
         for item in dados_lista:
             if (item == b''):
-                self.callback(dados_acumulados)
-                dados_acumulados = b''
+                if (dados_acumulados != b''):
+                    self.callback(dados_acumulados)
+                    dados_acumulados = b''
             dados_acumulados = dados_acumulados + item
         
         pass
