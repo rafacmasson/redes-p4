@@ -63,9 +63,12 @@ class Enlace:
         # vir quebrado de várias formas diferentes - por exemplo, podem vir
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
+        dados_totais = b''
         dados_lista = dados.split(b'\xc0')
         for item in dados_lista:
-            if (len(item) != 0): self.callback(item)
+            if (len(item) != 0): 
+                dados_totais = dados_totais + item
+        self.callback(item)
 
         pass
         # self.
