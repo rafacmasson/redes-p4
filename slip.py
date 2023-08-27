@@ -65,10 +65,11 @@ class Enlace:
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
 
-        dados_lista = dados.split(b'\xc0')
+        self.fila += dados
+        quadros = self.fila.split(b'\xC0')
         # dados_acumulados = b''
 
-        quadro = dados_lista[0]
+        quadro = quadros[0]
         quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
 
         if len(quadro) > 0:
