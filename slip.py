@@ -69,9 +69,16 @@ class Enlace:
         # dados_acumulados = b''
 
         quadro = dados_lista[0]
+        quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
 
         if len(quadro) > 0:
             self.callback(quadro)
+
+        # AssertionError: Ao receber os dados [b'\xc0ABC\xc0'] pela linha serial, deveriam ter sido
+        # reconhecidos os datagramas [b'ABC'], mas foram reconhecidos []
+
+        #AssertionError: Ao receber os dados [b'\xdb\xdd\xc0'] pela linha serial, deveriam ter sido
+        # reconhecidos os datagramas [b'\xdb'], mas foram reconhecidos [b'\xdb\xdd']
 
         # print(dados_lista)
         # for item in dados_lista:
