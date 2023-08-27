@@ -68,14 +68,19 @@ class Enlace:
         dados_lista = dados.split(b'\xc0')
         # dados_acumulados = b''
 
+        # for quadro in dados_lista:
+        #     if len(quadro) > 0:
+        #         break
+
         for quadro in dados_lista:
             if len(quadro) > 0:
-                break
+                quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
+                self.callback(quadro)
 
-        quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
+        # quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
 
-        if len(quadro) > 0:
-            self.callback(quadro)
+        # if len(quadro) > 0:
+        #     self.callback(quadro)
 
         # AssertionError: Ao receber os dados [b'\xc0ABC\xc0'] pela linha serial, deveriam ter sido
         # reconhecidos os datagramas [b'ABC'], mas foram reconhecidos []
