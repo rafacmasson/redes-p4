@@ -73,7 +73,9 @@ class Enlace:
                 break
 
         quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
-        self.callback(quadro)
+
+        if len(quadro) > 0:
+            self.callback(quadro)
 
         # AssertionError: Ao receber os dados [b'\xc0ABC\xc0'] pela linha serial, deveriam ter sido
         # reconhecidos os datagramas [b'ABC'], mas foram reconhecidos []
