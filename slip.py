@@ -65,6 +65,7 @@ class Enlace:
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
 
+        self.fila = b''
         self.fila += dados
         quadros = self.fila.split(b'\xC0')
         # dados_acumulados = b''
