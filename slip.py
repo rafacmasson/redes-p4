@@ -65,6 +65,8 @@ class Enlace:
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
 
+        if not hasattr(self, 'dados_lista'):
+            self.dados_lista = b''
         self.dados_lista += dados
         self.dados_lista = self.dados_lista.split(b'\xc0')
         #dados_lista = dados.split(b'\xc0')
