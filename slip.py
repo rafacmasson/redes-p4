@@ -57,112 +57,21 @@ class Enlace:
         pass
 
     def __raw_recv(self, dados):
-        if not hasattr(self, 'fila'):
-            self.fila = b''
-        self.fila += dados
+        if not hasattr(self, 'dados_acumulados'):
+            self.dados_acumulados = b''
+        self.dados_acumulados += dados
         
-        while self.fila:
-            fim = self.fila.find(b'\xC0')
+        while self.dados_acumulados:
+            fim = self.dados_acumulados.find(b'\xC0')
             
             if fim != -1:
-                quadro = self.fila[:fim]
+                quadro = self.dados_acumulados[:fim]
                 
                 if len(quadro) > 0:
                     quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
                     
                     self.callback(quadro)
                 
-                self.fila = self.fila[fim + 1:]
+                self.dados_acumulados = self.dados_acumulados[fim + 1:]
             else:
-                #self.fila = b''
                 break
-        # TODO: Preencha aqui com o código para receber dados da linha serial.
-        # Trate corretamente as sequências de escape. Quando ler um quadro
-        # completo, repasse o datagrama contido nesse quadro para a camada
-        # superior chamando self.callback. Cuidado pois o argumento dados pode
-        # vir quebrado de várias formas diferentes - por exemplo, podem vir
-        # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
-        # pedaço de outro, ou vários quadros de uma vez só.
-
-        # if not hasattr(self, 'dados_lista'):
-        #     self.dados_lista = b''
-        # self.dados_lista += dados
-        # #self.dados_lista = b''.join(self.dados_lista)
-        # quadros = self.dados_lista.split(b'\xc0')
-        # #dados_lista = dados.split(b'\xc0')
-        # # dados_acumulados = b''
-
-        # # for quadro in dados_lista:
-        # #     if len(quadro) > 0:
-        # #         break
-
-        # for quadro in quadros:
-        #     if len(quadro) > 0:
-        #         quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
-        #         self.callback(quadro)
-
-        
-
-        # quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
-
-        # if len(quadro) > 0:
-        #     self.callback(quadro)
-
-        # AssertionError: Ao receber os dados [b'\xc0ABC\xc0'] pela linha serial, deveriam ter sido
-        # reconhecidos os datagramas [b'ABC'], mas foram reconhecidos []
-
-        #AssertionError: Ao receber os dados [b'\xdb\xdd\xc0'] pela linha serial, deveriam ter sido
-        # reconhecidos os datagramas [b'\xdb'], mas foram reconhecidos [b'\xdb\xdd']
-
-        # print(dados_lista)
-        # for item in dados_lista:
-        #     print(item)
-        #     if (item == b''):
-        #         if ((self.dados_acumulados != b'') & (len(self.dados_acumulados) != 0)):
-        #             print('Adicionando o', self.dados_acumulados)
-        #             self.callback(self.dados_acumulados)
-        #             self.dados_acumulados = b''
-        #     self.dados_acumulados = self.dados_acumulados + item
-        #     print('Dados atuais: ', self.dados_acumulados)
-        # if (len(self.dados_acumulados) != 0):
-        #     self.callback(self.dados_acumulados)
-
-        # pass
-'''
-        acumulador = b''
-        for i in range(len(dados)):
-            if (dados[i:i+1] == b'\xc0' & acumulador != b''):
-                self.callback(acumulador)
-                acumulador = b''
-            else:
-                acumulador = acumulador + dados[i:i+1]
-'''
-        # dados_lista = dados.split(b'\xc0')
-        # acumulador = b''
-
-        # if (len(dados_lista) == 1):
-        #     if (dados_lista[0] != b''):
-        #         acumulador = acumulador + dados_lista[0]
-        #     else:
-        #         self.callback(acumulador)
-
-        # else:
-        #     for item in dados_lista:
-        #         if (len(item) != 0): 
-        #             self.callback(item)
-
-                # self.dados_acumulados = self.dados_acumulados + item
-            # elif (len(self.dados_acumulados) != 0 & len(item) == 0):
-                # self.callback(self.dados_acumulados)
-                # self.dados_acumulados = b''
-        # if (self.dados_acumulados != b''):
-
-        # self.
-        # self.residuo_dados = self.residuo_dados + dados
-        # self.residuo_dados = self.residuo_dados.split(b'\xC0')
-
-        # if self.residuo_dados[-1] == b'': # todos os dados estão completos
-            # self.callback(self.residuo_dados)
-        
-            # conexao.dados_residuais = conexao.dados_residuais[-1]  # os dados recebidos terminam com uma parte incompleta
-
