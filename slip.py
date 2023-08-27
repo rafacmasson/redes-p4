@@ -43,7 +43,7 @@ class Enlace:
     def __init__(self, linha_serial):
         self.linha_serial = linha_serial
         self.linha_serial.registrar_recebedor(self.__raw_recv)
-        # self.dados_acumulados = b''
+        self.dados_acumulados = b''
 
     def registrar_recebedor(self, callback):
         self.callback = callback
@@ -66,20 +66,20 @@ class Enlace:
         # pedaço de outro, ou vários quadros de uma vez só.
 
         dados_lista = dados.split(b'\xc0')
-        dados_acumulados = b''
+        # dados_acumulados = b''
 
         print(dados_lista)
         for item in dados_lista:
             print(item)
             if (item == b''):
-                if ((dados_acumulados != b'') & (len(dados_acumulados) != 0)):
-                    print('Adicionando o', dados_acumulados)
-                    self.callback(dados_acumulados)
-                    dados_acumulados = b''
-            dados_acumulados = dados_acumulados + item
-            print('Dados atuais: ', dados_acumulados)
-        if (len(dados_acumulados) != 0):
-            self.callback(dados_acumulados)
+                if ((self.dados_acumulados != b'') & (len(self.dados_acumulados) != 0)):
+                    print('Adicionando o', self.dados_acumulados)
+                    self.callback(self.dados_acumulados)
+                    self.dados_acumulados = b''
+            self.dados_acumulados = self.dados_acumulados + item
+            print('Dados atuais: ', self.dados_acumulados)
+        if (len(self.dados_acumulados) != 0):
+            self.callback(self.dados_acumulados)
 
         pass
 '''
