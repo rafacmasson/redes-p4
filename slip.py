@@ -68,20 +68,25 @@ class Enlace:
         dados_lista = dados.split(b'\xc0')
         # dados_acumulados = b''
 
-        print(dados_lista)
-        for item in dados_lista:
-            print(item)
-            if (item == b''):
-                if ((self.dados_acumulados != b'') & (len(self.dados_acumulados) != 0)):
-                    print('Adicionando o', self.dados_acumulados)
-                    self.callback(self.dados_acumulados)
-                    self.dados_acumulados = b''
-            self.dados_acumulados = self.dados_acumulados + item
-            print('Dados atuais: ', self.dados_acumulados)
-        if (len(self.dados_acumulados) != 0):
-            self.callback(self.dados_acumulados)
+        quadro = dados_lista[0]
 
-        pass
+        if len(quadro) > 0:
+            self.callback(quadro)
+
+        # print(dados_lista)
+        # for item in dados_lista:
+        #     print(item)
+        #     if (item == b''):
+        #         if ((self.dados_acumulados != b'') & (len(self.dados_acumulados) != 0)):
+        #             print('Adicionando o', self.dados_acumulados)
+        #             self.callback(self.dados_acumulados)
+        #             self.dados_acumulados = b''
+        #     self.dados_acumulados = self.dados_acumulados + item
+        #     print('Dados atuais: ', self.dados_acumulados)
+        # if (len(self.dados_acumulados) != 0):
+        #     self.callback(self.dados_acumulados)
+
+        # pass
 '''
         acumulador = b''
         for i in range(len(dados)):
