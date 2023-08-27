@@ -57,6 +57,25 @@ class Enlace:
         pass
 
     def __raw_recv(self, dados):
+        if not hasattr(self, 'fila'):
+            self.fila = b''
+        self.fila += dados
+        
+        while self.fila:
+            fim = self.fila.find(b'\xC0')
+            
+            if fim != -1:
+                quadro = self.fila[:fim]
+                
+                if len(quadro) > 0:
+                    quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
+                    
+                    self.callback(quadro)
+                
+                self.fila = self.fila[fim + 1:]
+            else:
+                #self.fila = b''
+                break
         # TODO: Preencha aqui com o código para receber dados da linha serial.
         # Trate corretamente as sequências de escape. Quando ler um quadro
         # completo, repasse o datagrama contido nesse quadro para a camada
@@ -65,22 +84,22 @@ class Enlace:
         # apenas pedaços de um quadro, ou um pedaço de quadro seguido de um
         # pedaço de outro, ou vários quadros de uma vez só.
 
-        if not hasattr(self, 'dados_lista'):
-            self.dados_lista = b''
-        self.dados_lista += dados
-        #self.dados_lista = b''.join(self.dados_lista)
-        quadros = self.dados_lista.split(b'\xc0')
-        #dados_lista = dados.split(b'\xc0')
-        # dados_acumulados = b''
+        # if not hasattr(self, 'dados_lista'):
+        #     self.dados_lista = b''
+        # self.dados_lista += dados
+        # #self.dados_lista = b''.join(self.dados_lista)
+        # quadros = self.dados_lista.split(b'\xc0')
+        # #dados_lista = dados.split(b'\xc0')
+        # # dados_acumulados = b''
 
-        # for quadro in dados_lista:
+        # # for quadro in dados_lista:
+        # #     if len(quadro) > 0:
+        # #         break
+
+        # for quadro in quadros:
         #     if len(quadro) > 0:
-        #         break
-
-        for quadro in quadros:
-            if len(quadro) > 0:
-                quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
-                self.callback(quadro)
+        #         quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
+        #         self.callback(quadro)
 
         
 
