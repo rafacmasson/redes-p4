@@ -68,8 +68,8 @@ class Enlace:
         if not hasattr(self, 'dados_lista'):
             self.dados_lista = b''
         self.dados_lista += dados
-        self.dados_lista = b''.join(self.dados_lista)
-        self.dados_lista = self.dados_lista.split(b'\xc0')
+        #self.dados_lista = b''.join(self.dados_lista)
+        quadros = self.dados_lista.split(b'\xc0')
         #dados_lista = dados.split(b'\xc0')
         # dados_acumulados = b''
 
@@ -77,10 +77,12 @@ class Enlace:
         #     if len(quadro) > 0:
         #         break
 
-        for quadro in self.dados_lista:
+        for quadro in quadros:
             if len(quadro) > 0:
                 quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
                 self.callback(quadro)
+
+        
 
         # quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
 
