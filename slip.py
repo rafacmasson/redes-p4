@@ -68,6 +68,7 @@ class Enlace:
         if not hasattr(self, 'dados_lista'):
             self.dados_lista = b''
         self.dados_lista += dados
+        self.dados_lista = b''.join(self.dados_lista)
         self.dados_lista = self.dados_lista.split(b'\xc0')
         #dados_lista = dados.split(b'\xc0')
         # dados_acumulados = b''
