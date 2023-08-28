@@ -97,8 +97,7 @@ class Enlace:
                     finally:
                         # faça aqui a limpeza necessária para garantir que não vão sobrar
                         # pedaços do datagrama em nenhum buffer mantido por você
-                        # self.dados_acumulados = b''
-                        print(quadro)
+                        pass
                 
                 self.dados_acumulados = self.dados_acumulados[fim + 1:]
             else:
