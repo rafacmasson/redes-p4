@@ -85,7 +85,7 @@ class Enlace:
                     quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
                     
                     # quadro.self(passo5)
-                    passo5(quadro)
+                    self.passo5(quadro)
                 
                 self.dados_acumulados = self.dados_acumulados[fim + 1:]
             else:
