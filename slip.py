@@ -56,6 +56,7 @@ class Enlace:
 
         pass
 
+    '''
     def passo5(self, datagrama):
         try:
             self.callback(datagrama)
@@ -69,6 +70,7 @@ class Enlace:
             self.dados_acumulados = b''
         
         pass
+    '''
 
     def __raw_recv(self, dados):
         if not hasattr(self, 'dados_acumulados'):
@@ -85,7 +87,16 @@ class Enlace:
                     quadro = quadro.replace(b'\xDB\xDC', b'\xC0').replace(b'\xDB\xDD', b'\xDB')
                     
                     # quadro.self(passo5)
-                    self.passo5(quadro)
+                    try:
+                        self.callback(quadro)
+                    except:
+                        # ignora a exceção, mas mostra na tela
+                        import traceback
+                        traceback.print_exc()
+                    finally:
+                        # faça aqui a limpeza necessária para garantir que não vão sobrar
+                        # pedaços do datagrama em nenhum buffer mantido por você
+                        self.dados_acumulados = b''
                 
                 self.dados_acumulados = self.dados_acumulados[fim + 1:]
             else:
